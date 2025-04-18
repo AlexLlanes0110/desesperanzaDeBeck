@@ -19,8 +19,7 @@ def calcular_puntaje(respuestas):
     puntajes = {}
 
     for i in range(1, 21):
-        # Asegúrate de que el nombre de la columna coincide (ej: "Item1", "1", etc.)
-        item_col = f'Item{i}'  # Modifica esto si los nombres son diferentes (ej: f'{i}')
+        item_col = f'Item{i}'  
         respuesta = respuestas.get(item_col, '')
         respuesta = str(respuesta).strip().upper()
 
@@ -37,12 +36,12 @@ def calcular_puntaje(respuestas):
         puntajes[item_col] = puntaje
         puntaje_total += puntaje
 
-    # Cálculo de factores (igual que antes)
+    # Cálculo de factores
     factor_afectivo = sum(puntajes[f'Item{i}'] for i in factor_afectivo_items)
     factor_motivacional = sum(puntajes[f'Item{i}'] for i in factor_motivacional_items)
     factor_cognitivo = sum(puntajes[f'Item{i}'] for i in factor_cognitivo_items)
 
-    # Clasificación de riesgo (igual que antes)
+    # Clasificación de riesgo 
     if puntaje_total <= 3:
         riesgo = "Ningún o mínimo riesgo"
     elif puntaje_total <= 8:
@@ -54,7 +53,7 @@ def calcular_puntaje(respuestas):
 
     return puntaje_total, factor_afectivo, factor_motivacional, factor_cognitivo, riesgo
 
-# Procesar todos los sujetos (igual que antes)
+# Procesar todos los sujetos 
 resultados = []
 for idx, row in df.iterrows():
     sujeto = row.iloc[0]
@@ -62,7 +61,7 @@ for idx, row in df.iterrows():
     total, afectivo, motivacional, cognitivo, riesgo = calcular_puntaje(respuestas)
     resultados.append([sujeto, total, afectivo, motivacional, cognitivo, riesgo])
 
-# Crear DataFrame de resultados (igual que antes)
+# Crear DataFrame de resultados
 df_resultados = pd.DataFrame(resultados, columns=[
     'Sujeto', 'Puntaje Total', 'Factor Afectivo',
     'Factor Motivacional', 'Factor Cognitivo', 'Clasificación de Riesgo'
